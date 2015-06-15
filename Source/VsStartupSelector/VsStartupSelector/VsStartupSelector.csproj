@@ -195,6 +195,9 @@
     </VSCTCompile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="license.txt">
+      <IncludeInVSIX>true</IncludeInVSIX>
+    </Content>
     <Content Include="Resources\Package.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <IncludeInVSIX>true</IncludeInVSIX>

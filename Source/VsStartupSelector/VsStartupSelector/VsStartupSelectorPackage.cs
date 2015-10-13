@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.ComponentModel.Design;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows;
@@ -109,32 +110,41 @@ namespace iSp.VsStartupSelector
 
             var fileName = dialog.FileName;
 
-
-            var regexPattern = @"\\\\(?<host>.*?)\\(?<drive>.)\$\\(?<path>.*)";
-            var regex = new Regex(regexPattern);
-            var match = regex.Match(fileName);
-
-            if (!match.Success)
+            if (Path.IsPathRooted(fileName))
             {
-                MessageBox.Show(
-                    "Unsupported path. Select the path that like \\\\hostname\\driveletter$\\path\\app.exe", 
-                    "Startup Selector", 
-                    MessageBoxButton.OK, 
-                    MessageBoxImage.Error);
-
+                var config = selectedProject.ConfigurationManager.ActiveConfiguration;
+                config.Properties.Item("StartAction").Value = VSLangProj.prjStartAction.prjStartActionProgram;
+                config.Properties.Item("StartProgram").Value = fileName;
+                config.Properties.Item("RemoteDebugMachine").Value = String.Empty;
+                config.Properties.Item("RemoteDebugEnabled").Value = false;
+                selectedProject.Save();
                 return;
             }
 
-            var host = match.Groups["host"].Value;
-            var drive = match.Groups["drive"].Value;
-            var path = match.Groups["path"].Value;
+            var regex = new Regex(@"\\\\(?<host>.*?)\\(?<drive>.)\$\\(?<path>.*)");
+            var match = regex.Match(fileName);
+            if (match.Success)
+            {
+                var host = match.Groups["host"].Value;
+                var drive = match.Groups["drive"].Value;
+                var path = match.Groups["path"].Value;
 
-            var config = selectedProject.ConfigurationManager.ActiveConfiguration;
-            config.Properties.Item("StartAction").Value = VSLangProj.prjStartAction.prjStartActionProgram;
-            config.Properties.Item("StartProgram").Value = drive + @":\" + path;
-            config.Properties.Item("RemoteDebugMachine").Value = host;
-            config.Properties.Item("RemoteDebugEnabled").Value = true;
-            selectedProject.Save();
+                var config = selectedProject.ConfigurationManager.ActiveConfiguration;
+                config.Properties.Item("StartAction").Value = VSLangProj.prjStartAction.prjStartActionProgram;
+                config.Properties.Item("StartProgram").Value = drive + @":\" + path;
+                config.Properties.Item("RemoteDebugMachine").Value = host;
+                config.Properties.Item("RemoteDebugEnabled").Value = true;
+                selectedProject.Save();
+                return;
+            }
+
+            MessageBox.Show(
+                "Unsupported path. Select the path that like:\r\n" +
+                "  - \\\\hostname\\driveletter$\\path\\app.exe\r\n" +
+                "  - driverletter:\\path\\app.exe",
+                "Startup Selector",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
         }
     }
 }

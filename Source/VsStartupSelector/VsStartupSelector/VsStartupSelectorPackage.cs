@@ -139,9 +139,9 @@ namespace iSp.VsStartupSelector
             }
 
             MessageBox.Show(
-                "Unsupported path. Select the path that like:\r\n" +
-                "  - \\\\hostname\\driveletter$\\path\\app.exe\r\n" +
-                "  - driverletter:\\path\\app.exe",
+                "Unsupported path format. Select the path with one of formats:\n" +
+                "  \\\\hostname\\driveletter$\\path\\app.exe\n" +
+                "  driverletter:\\path\\app.exe",
                 "Startup Selector",
                 MessageBoxButton.OK,
                 MessageBoxImage.Error);

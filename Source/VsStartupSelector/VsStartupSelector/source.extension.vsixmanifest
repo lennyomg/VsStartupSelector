@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="ad4605b5-9412-4bdb-aac3-ec46b060786c" Version="1.1.2.0" Language="en-US" Publisher="i.Sp" />
+    <Identity Id="ad4605b5-9412-4bdb-aac3-ec46b060786c" Version="1.1.3.0" Language="en-US" Publisher="i.Sp" />
     <DisplayName>VsStartupSelector</DisplayName>
     <Description xml:space="preserve">Tool for easier selection of startup app from remote or local machine. Select exe file from local or remote machine (via admin share), then "debug" configuration will be updated automatically.</Description>
     <License>license.txt</License>

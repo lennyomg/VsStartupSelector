@@ -110,17 +110,6 @@ namespace iSp.VsStartupSelector
 
             var fileName = dialog.FileName;
 
-            if (Path.IsPathRooted(fileName))
-            {
-                var config = selectedProject.ConfigurationManager.ActiveConfiguration;
-                config.Properties.Item("StartAction").Value = VSLangProj.prjStartAction.prjStartActionProgram;
-                config.Properties.Item("StartProgram").Value = fileName;
-                config.Properties.Item("RemoteDebugMachine").Value = String.Empty;
-                config.Properties.Item("RemoteDebugEnabled").Value = false;
-                selectedProject.Save();
-                return;
-            }
-
             var regex = new Regex(@"\\\\(?<host>.*?)\\(?<drive>.)\$\\(?<path>.*)");
             var match = regex.Match(fileName);
             if (match.Success)
@@ -134,6 +123,17 @@ namespace iSp.VsStartupSelector
                 config.Properties.Item("StartProgram").Value = drive + @":\" + path;
                 config.Properties.Item("RemoteDebugMachine").Value = host;
                 config.Properties.Item("RemoteDebugEnabled").Value = true;
+                selectedProject.Save();
+                return;
+            }
+
+            if (Path.IsPathRooted(fileName))
+            {
+                var config = selectedProject.ConfigurationManager.ActiveConfiguration;
+                config.Properties.Item("StartAction").Value = VSLangProj.prjStartAction.prjStartActionProgram;
+                config.Properties.Item("StartProgram").Value = fileName;
+                config.Properties.Item("RemoteDebugMachine").Value = String.Empty;
+                config.Properties.Item("RemoteDebugEnabled").Value = false;
                 selectedProject.Save();
                 return;
             }

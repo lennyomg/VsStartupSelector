@@ -54,7 +54,7 @@
         <CommandFlag>DefaultInvisible</CommandFlag>
         <CommandFlag>DynamicVisibility</CommandFlag>
         <Strings>
-          <ButtonText>Choose Remote App as Startup...</ButtonText>
+          <ButtonText>Choose External App as Startup...</ButtonText>
         </Strings>
       </Button>
 

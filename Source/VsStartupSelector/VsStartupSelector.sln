@@ -19,13 +19,4 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://isp-dev.visualstudio.com/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = VsStartupSelector\\VsStartupSelector.csproj
-		SccProjectName1 = VsStartupSelector
-		SccLocalPath1 = VsStartupSelector
-	EndGlobalSection
 EndGlobal

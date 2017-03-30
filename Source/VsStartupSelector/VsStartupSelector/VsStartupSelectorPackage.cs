@@ -119,7 +119,7 @@ namespace iSp.VsStartupSelector
                 var path = match.Groups["path"].Value;
 
                 var config = selectedProject.ConfigurationManager.ActiveConfiguration;
-                config.Properties.Item("StartAction").Value = VSLangProj.prjStartAction.prjStartActionProgram;
+                config.Properties.Item("StartAction").Value = 1;
                 config.Properties.Item("StartProgram").Value = drive + @":\" + path;
                 config.Properties.Item("RemoteDebugMachine").Value = host;
                 config.Properties.Item("RemoteDebugEnabled").Value = true;
@@ -130,7 +130,7 @@ namespace iSp.VsStartupSelector
             if (Path.IsPathRooted(fileName))
             {
                 var config = selectedProject.ConfigurationManager.ActiveConfiguration;
-                config.Properties.Item("StartAction").Value = VSLangProj.prjStartAction.prjStartActionProgram;
+                config.Properties.Item("StartAction").Value = 1;
                 config.Properties.Item("StartProgram").Value = fileName;
                 config.Properties.Item("RemoteDebugMachine").Value = String.Empty;
                 config.Properties.Item("RemoteDebugEnabled").Value = false;
